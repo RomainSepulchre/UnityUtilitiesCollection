@@ -1,71 +1,155 @@
-﻿using UnityEngine;
 using System;
-using System.Collections;
+using UnityEngine;
 
 //Original version of the ConditionalHideAttribute created by Brecht Lecluyse (www.brechtos.com)
-//Modified by: -
+// See https://www.brechtos.com/hiding-or-disabling-inspector-properties-using-propertydrawers-within-unity-5/
+//Modified by: Romain Sepulchre
 
-[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property |
-    AttributeTargets.Class | AttributeTargets.Struct, Inherited = true)]
-public class ConditionalHideAttribute : PropertyAttribute
+namespace RS.Utilities
 {
-    public string ConditionalSourceField = "";
-    public string ConditionalSourceField2 = "";
-    public string[] ConditionalSourceFields = new string[] { };
-    public bool[] ConditionalSourceFieldInverseBools = new bool[] { };
-    public bool HideInInspector = false;
-    public bool Inverse = false;
-    public bool UseOrLogic = false;
-
-    public bool InverseCondition1 = false;
-    public bool InverseCondition2 = false;
-
-
-	// Use this for initialization
-    public ConditionalHideAttribute(string conditionalSourceField)
+    /// <summary>
+    /// An attribute that allows to hide or disable some fields in the inspector depending on a condition
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Struct, Inherited = true)]
+    public class ConditionalHideAttribute : PropertyAttribute
     {
-        this.ConditionalSourceField = conditionalSourceField;
-        this.HideInInspector = false;
-        this.Inverse = false;
-    }
+        /// <summary>
+        /// The name of the field that will act as condition (field can be a bool or an object reference)
+        /// </summary>
+        public string ConditionalSourceField = "";
 
-    public ConditionalHideAttribute(string conditionalSourceField, bool hideInInspector)
-    {
-        this.ConditionalSourceField = conditionalSourceField;
-        this.HideInInspector = hideInInspector;
-        this.Inverse = false;
-    }
+        /// <summary>
+        /// An array of field names that will act as conditions, allow to have more than one condition (fields can be a bool or an object reference)
+        /// </summary>
+        public string[] ConditionalSourceFields = new string[] { };
 
-    public ConditionalHideAttribute(string conditionalSourceField, bool hideInInspector, bool inverse)
-    {
-        this.ConditionalSourceField = conditionalSourceField;
-        this.HideInInspector = hideInInspector;
-        this.Inverse = inverse;
-    }
+        /// <summary>
+        /// An array of bool that match entries in <i>ConditionalSourceFields</i> to tell if the condition must be inverted or not
+        /// </summary>
+        public bool[] ConditionalSourceFieldInverseBools = new bool[] { };
 
-    public ConditionalHideAttribute(bool hideInInspector = false)
-    {
-        this.ConditionalSourceField = "";
-        this.HideInInspector = hideInInspector;
-        this.Inverse = false;
-    }
+        /// <summary>
+        /// Hide fields when true and disable fields when false
+        /// </summary>
+        public bool HideInInspector = false;
 
-    public ConditionalHideAttribute(string[] conditionalSourceFields,bool[] conditionalSourceFieldInverseBools, bool hideInInspector, bool inverse)
-    {
-        this.ConditionalSourceFields = conditionalSourceFields;
-        this.ConditionalSourceFieldInverseBools = conditionalSourceFieldInverseBools;
-        this.HideInInspector = hideInInspector;
-        this.Inverse = inverse;
-    }
+        /// <summary>
+        /// Should we inverse the condition (hide/disable when the condition is met)
+        /// </summary>
+        public bool Inverse = false;
 
-    public ConditionalHideAttribute(string[] conditionalSourceFields, bool hideInInspector, bool inverse)
-    {
-        this.ConditionalSourceFields = conditionalSourceFields;        
-        this.HideInInspector = hideInInspector;
-        this.Inverse = inverse;
-    }
+        /// <summary>
+        /// Should use OR logic instead of AND logic when having multiple conditions.
+        /// To use this parameter you must override <i>UseOrLogic</i> in the attribute declaration.
+        /// (Ex: [ConditionalHide(new string[] { nameof(ConditionA), nameof(ConditionB) }, UseOrLogic = true)]).
+        /// </summary>
+        public bool UseOrLogic = false;
 
+        // TODO: REMOVE AFTER CLEANING FROM PROPERTY DRAWER
+        public string ConditionalSourceField2;
+        public bool InverseCondition1;
+        public bool InverseCondition2;
+
+        /// <summary>
+        /// Disable the field when the condition isn't met.
+        /// </summary>
+        /// <param name="conditionalSourceField">The name of the field that will act as condition (field can be a bool or an object reference)</param>
+        public ConditionalHideAttribute(string conditionalSourceField)
+        {
+            this.ConditionalSourceField = conditionalSourceField;
+            this.HideInInspector = false;
+            this.Inverse = false;
+        }
+
+        /// <summary>
+        /// Hide or disable the field when the condition isn't met depending on <i>hideInInspector</i> parameter.
+        /// </summary>
+        /// <param name="conditionalSourceField">The name of the field that will act as condition (field can be a bool or an object reference)</param>
+        /// <param name="hideInInspector">Should we hide or disable the field</param>
+        public ConditionalHideAttribute(string conditionalSourceField, bool hideInInspector)
+        {
+            this.ConditionalSourceField = conditionalSourceField;
+            this.HideInInspector = hideInInspector;
+            this.Inverse = false;
+        }
+
+        /// <summary>
+        /// Hide or disable the field when the condition isn't met depending on <i>hideInInspector</i> parameter.
+        /// Condition can be inverted using <i>inverse</i> parameter.
+        /// </summary>
+        /// <param name="conditionalSourceField">The name of the field that will act as condition (field can be a bool or an object reference)</param>
+        /// <param name="hideInInspector">Should we hide or disable the field</param>
+        /// <param name="inverse">Should we inverse the condition</param>
+        public ConditionalHideAttribute(string conditionalSourceField, bool hideInInspector, bool inverse)
+        {
+            this.ConditionalSourceField = conditionalSourceField;
+            this.HideInInspector = hideInInspector;
+            this.Inverse = inverse;
+        }
+
+        /// <summary>
+        /// Hide or disable the field depending on <i>hideInInspector</i> parameter, when using this constructor you must at least override <i>ConditionalSourceField</i> in the attribute declaration.
+        /// (Ex: [ConditionalHide(true, ConditionalSourceField = nameof(Condition))]).
+        /// </summary>
+        /// <param name="hideInInspector">Should we hide or disable the field</param>
+        public ConditionalHideAttribute(bool hideInInspector = false)
+        {
+            this.ConditionalSourceField = "";
+            this.HideInInspector = hideInInspector;
+            this.Inverse = false;
+        }
+
+        /// <summary>
+        /// Disable the field when the conditions aren't met (allow to use as many condition as needed).
+        /// </summary>
+        /// <param name="conditionalSourceFields">An array of field names that will act as conditions (fields can be a bool or an object reference)</param>
+        public ConditionalHideAttribute(string[] conditionalSourceFields)
+        {
+            this.ConditionalSourceFields = conditionalSourceFields;
+            this.HideInInspector = false;
+            this.Inverse = false;
+        }
+
+        /// <summary>
+        /// Hide or disable the field when the conditions aren't met depending on <i>hideInInspector</i> parameter (allow to use as many condition as needed).
+        /// </summary>
+        /// <param name="conditionalSourceFields">An array of field names that will act as conditions (fields can be a bool or an object reference)</param>
+        /// <param name="hideInInspector">Should we hide or disable the field</param>
+        public ConditionalHideAttribute(string[] conditionalSourceFields, bool hideInInspector)
+        {
+            this.ConditionalSourceFields = conditionalSourceFields;
+            this.HideInInspector = hideInInspector;
+            this.Inverse = false;
+        }
+
+        /// <summary>
+        /// Hide or disable the field when the conditions aren't met depending on <i>hideInInspector</i> parameter (allow to use as many condition as needed).
+        /// Conditions can be inverted using <i>inverse</i> parameter.
+        /// </summary>
+        /// <param name="conditionalSourceFields">An array of field names that will act as conditions (fields can be a bool or an object reference)</param>
+        /// <param name="hideInInspector">Should we hide or disable the field</param>
+        /// <param name="inverse">Should we inverse the condition</param>
+        public ConditionalHideAttribute(string[] conditionalSourceFields, bool hideInInspector, bool inverse)
+        {
+            this.ConditionalSourceFields = conditionalSourceFields;
+            this.HideInInspector = hideInInspector;
+            this.Inverse = inverse;
+        }
+
+        /// <summary>
+        /// Hide or disable the field when the conditions aren't met depending on <i>hideInInspector</i> parameter (allow to use as many condition as needed).
+        /// Each conditions can be inverted separetely by setting the bool at the matching index in <i>conditionalSourceFieldInverseBools</i>.
+        /// </summary>
+        /// <param name="conditionalSourceFields">An array of field names that will act as conditions (fields can be a bool or an object reference)</param>
+        /// <param name="conditionalSourceFieldInverseBools">An array of bool that match entries in <i>ConditionalSourceFields</i> to tell if the condition must be inverted or not</param>
+        /// <param name="hideInInspector">Should we hide or disable the field</param>
+        /// <param name="inverse">Should we inverse the condition</param>
+        public ConditionalHideAttribute(string[] conditionalSourceFields, bool[] conditionalSourceFieldInverseBools, bool hideInInspector, bool inverse)
+        {
+            this.ConditionalSourceFields = conditionalSourceFields;
+            this.ConditionalSourceFieldInverseBools = conditionalSourceFieldInverseBools;
+            this.HideInInspector = hideInInspector;
+            this.Inverse = inverse; // TODO: What's the point of having this here since we should use conditionalSourceFieldInverseBools ?
+        }
+    } 
 }
-
-
-

@@ -16,6 +16,7 @@ namespace RS.Example
             public Vector3 Position;
             public GameObject GameObject;
             public List<float> FloatList;
+            public string[] StringArray;
         }
 
         [Header("Conditional hide")]
@@ -33,6 +34,8 @@ namespace RS.Example
         public GameObject GameObjectA;
         [ConditionalHide(nameof(ConditionToShow), true)]
         public List<float> FloatListA;
+        [ConditionalHide(nameof(ConditionToShow), true)]
+        public string[] StringArrayA;
         [ConditionalHide(nameof(ConditionToShow), true)]
         public SerializedClass SerializedClassA;
 
@@ -53,6 +56,8 @@ namespace RS.Example
         public GameObject GameObjectB;
         [ConditionalHide(nameof(ConditionToEnable))]
         public List<float> FloatListB;
+        [ConditionalHide(nameof(ConditionToEnable))]
+        public string[] StringArrayB;
         [ConditionalHide(nameof(ConditionToEnable))]
         public SerializedClass SerializedClassB;
 
@@ -75,6 +80,8 @@ namespace RS.Example
         [ConditionalHide(new string[] { nameof(ConditionAToShow), nameof(ConditionBToShow) }, true, false)]
         public List<float> FloatListC;
         [ConditionalHide(new string[] { nameof(ConditionAToShow), nameof(ConditionBToShow) }, true, false)]
+        public string[] StringArrayC;
+        [ConditionalHide(new string[] { nameof(ConditionAToShow), nameof(ConditionBToShow) }, true, false)]
         public SerializedClass SerializedClassC;
 
         [Space(30)]
@@ -96,6 +103,8 @@ namespace RS.Example
         [ConditionalHide(new string[] { nameof(ConditionAToEnable), nameof(ConditionBToEnable) }, false, false)]
         public List<float> FloatListD;
         [ConditionalHide(new string[] { nameof(ConditionAToEnable), nameof(ConditionBToEnable) }, false, false)]
+        public string[] StringArrayD;
+        [ConditionalHide(new string[] { nameof(ConditionAToEnable), nameof(ConditionBToEnable) }, false, false)]
         public SerializedClass SerializedClassD;
 
         [Space(30)]
@@ -115,6 +124,8 @@ namespace RS.Example
         public GameObject GameObjectE;
         [ConditionalHide(nameof(ObjectRefCondition))]
         public List<float> FloatListE;
+        [ConditionalHide(nameof(ObjectRefCondition))]
+        public string[] StringArrayE;
         [ConditionalHide(nameof(ObjectRefCondition))]
         public SerializedClass SerializedClassE;
 
@@ -137,6 +148,8 @@ namespace RS.Example
         [ConditionalHide(new string[] { nameof(ConditionAObjRef), nameof(ConditionBObjRef) }, false, false)]
         public List<float> FloatListF;
         [ConditionalHide(new string[] { nameof(ConditionAObjRef), nameof(ConditionBObjRef) }, false, false)]
+        public string[] StringArrayF;
+        [ConditionalHide(new string[] { nameof(ConditionAObjRef), nameof(ConditionBObjRef) }, false, false)]
         public SerializedClass SerializedClassF;
 
         [Space(30)]
@@ -146,5 +159,23 @@ namespace RS.Example
         public int intDisabled;
         [ConditionalHide(true)]
         public int intHidden; // Should not be seen in the inspector since its hidden
+
+        [Space(30)]
+
+        [Header("Test specific constructors")]
+        public bool testConditionA;
+        public bool testConditionB;
+
+        // Should be disabled when condition not met
+        [ConditionalHide(new string[] { nameof(testConditionA), nameof(testConditionB) })]
+        public int intCtrOnlyConditionArray;
+
+        // Should be hiddent when condition not met
+        [ConditionalHide(new string[] { nameof(testConditionA), nameof(testConditionB) }, true)]
+        public int intCtrConditionArrayAndHideBool;
+
+        //
+        [ConditionalHide(ConditionalSourceField = nameof(testConditionA))]
+        public int intCondProp; // Should not be seen in the inspector since its hidden
     } 
 }
