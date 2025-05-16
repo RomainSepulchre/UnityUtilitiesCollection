@@ -67,14 +67,14 @@ namespace RS.Example
         public bool ConditionAToShow;
         public bool ConditionBToShow;
 
-        [ConditionalHide(new string[] {nameof(ConditionAToShow), nameof(ConditionBToShow) } , true, false)]
+        [ConditionalHide(new string[] { nameof(ConditionAToShow), nameof(ConditionBToShow) }, true, false)]
         public int SomeIntC;
         [ConditionalHide(new string[] { nameof(ConditionAToShow), nameof(ConditionBToShow) }, true, false)]
         public bool UseSomethingC;
         [ConditionalHide(new string[] { nameof(ConditionAToShow), nameof(ConditionBToShow) }, true, false)]
         public string SomeStringC;
         [ConditionalHide(new string[] { nameof(ConditionAToShow), nameof(ConditionBToShow) }, true, false)]
-        public Vector3 PositionC; 
+        public Vector3 PositionC;
         [ConditionalHide(new string[] { nameof(ConditionAToShow), nameof(ConditionBToShow) }, true, false)]
         public GameObject GameObjectC;
         [ConditionalHide(new string[] { nameof(ConditionAToShow), nameof(ConditionBToShow) }, true, false)]
@@ -97,7 +97,7 @@ namespace RS.Example
         [ConditionalHide(new string[] { nameof(ConditionAToEnable), nameof(ConditionBToEnable) }, false, false)]
         public string SomeStringD;
         [ConditionalHide(new string[] { nameof(ConditionAToEnable), nameof(ConditionBToEnable) }, false, false)]
-        public Vector3 PositionD;       
+        public Vector3 PositionD;
         [ConditionalHide(new string[] { nameof(ConditionAToEnable), nameof(ConditionBToEnable) }, false, false)]
         public GameObject GameObjectD;
         [ConditionalHide(new string[] { nameof(ConditionAToEnable), nameof(ConditionBToEnable) }, false, false)]

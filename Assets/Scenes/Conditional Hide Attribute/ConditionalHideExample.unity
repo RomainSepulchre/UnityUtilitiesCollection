@@ -148,13 +148,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec9f336690e4844eb0434bdae1717a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConditionToShow: 1
+  ConditionToShow: 0
   SomeIntA: 0
   UseSomethingA: 0
   SomeStringA: 
   PositionA: {x: 0, y: 0, z: 0}
   GameObjectA: {fileID: 0}
   FloatListA: []
+  StringArrayA: []
   SerializedClassA:
     SomeInt: 0
     UseSomething: 0
@@ -162,14 +163,15 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     GameObject: {fileID: 0}
     FloatList: []
+    StringArray: []
   ConditionToEnable: 0
   SomeIntB: 0
   UseSomethingB: 0
   SomeStringB: 
   PositionB: {x: 0, y: 0, z: 0}
   GameObjectB: {fileID: 0}
-  FloatListB:
-  - 0
+  FloatListB: []
+  StringArrayB: []
   SerializedClassB:
     SomeInt: 0
     UseSomething: 0
@@ -177,14 +179,16 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     GameObject: {fileID: 0}
     FloatList: []
-  ConditionAToShow: 1
-  ConditionBToShow: 1
+    StringArray: []
+  ConditionAToShow: 0
+  ConditionBToShow: 0
   SomeIntC: 0
   UseSomethingC: 0
   SomeStringC: 
   PositionC: {x: 0, y: 0, z: 0}
   GameObjectC: {fileID: 0}
   FloatListC: []
+  StringArrayC: []
   SerializedClassC:
     SomeInt: 0
     UseSomething: 0
@@ -192,6 +196,7 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     GameObject: {fileID: 0}
     FloatList: []
+    StringArray: []
   ConditionAToEnable: 0
   ConditionBToEnable: 0
   SomeIntD: 0
@@ -200,6 +205,7 @@ MonoBehaviour:
   PositionD: {x: 0, y: 0, z: 0}
   GameObjectD: {fileID: 0}
   FloatListD: []
+  StringArrayD: []
   SerializedClassD:
     SomeInt: 0
     UseSomething: 0
@@ -207,6 +213,7 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     GameObject: {fileID: 0}
     FloatList: []
+    StringArray: []
   ObjectRefCondition: {fileID: 0}
   SomeIntE: 0
   UseSomethingE: 0
@@ -214,6 +221,7 @@ MonoBehaviour:
   PositionE: {x: 0, y: 0, z: 0}
   GameObjectE: {fileID: 0}
   FloatListE: []
+  StringArrayE: []
   SerializedClassE:
     SomeInt: 0
     UseSomething: 0
@@ -221,7 +229,8 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     GameObject: {fileID: 0}
     FloatList: []
-  ConditionAObjRef: 1
+    StringArray: []
+  ConditionAObjRef: 0
   ConditionBObjRef: {fileID: 0}
   SomeIntF: 0
   UseSomethingF: 0
@@ -229,6 +238,7 @@ MonoBehaviour:
   PositionF: {x: 0, y: 0, z: 0}
   GameObjectF: {fileID: 0}
   FloatListF: []
+  StringArrayF: []
   SerializedClassF:
     SomeInt: 0
     UseSomething: 0
@@ -236,8 +246,24 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     GameObject: {fileID: 0}
     FloatList: []
-  intDisabled: 0
-  intHidden: 0
+    StringArray: []
+  OrLogicConditionA: 0
+  OrLogicConditionB: 0
+  SomeIntG: 0
+  UseSomethingG: 0
+  SomeStringG: 
+  PositionG: {x: 0, y: 0, z: 0}
+  GameObjectG: {fileID: 0}
+  FloatListG: []
+  StringArrayG: []
+  SerializedClassG:
+    SomeInt: 0
+    UseSomething: 0
+    SomeString: 
+    Position: {x: 0, y: 0, z: 0}
+    GameObject: {fileID: 0}
+    FloatList: []
+    StringArray: []
 --- !u!4 &110418201
 Transform:
   m_ObjectHideFlags: 0

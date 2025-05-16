@@ -45,11 +45,6 @@ namespace RS.Utilities
         /// </summary>
         public bool UseOrLogic = false;
 
-        // TODO: REMOVE AFTER CLEANING FROM PROPERTY DRAWER
-        public string ConditionalSourceField2;
-        public bool InverseCondition1;
-        public bool InverseCondition2;
-
         /// <summary>
         /// Disable the field when the condition isn't met.
         /// </summary>
@@ -139,17 +134,18 @@ namespace RS.Utilities
         /// <summary>
         /// Hide or disable the field when the conditions aren't met depending on <i>hideInInspector</i> parameter (allow to use as many condition as needed).
         /// Each conditions can be inverted separetely by setting the bool at the matching index in <i>conditionalSourceFieldInverseBools</i>.
+        /// Using <i>inverse</i> here invert the final condition after <i>conditionalSourceFieldInverseBools</i> has been considered.
         /// </summary>
         /// <param name="conditionalSourceFields">An array of field names that will act as conditions (fields can be a bool or an object reference)</param>
         /// <param name="conditionalSourceFieldInverseBools">An array of bool that match entries in <i>ConditionalSourceFields</i> to tell if the condition must be inverted or not</param>
         /// <param name="hideInInspector">Should we hide or disable the field</param>
-        /// <param name="inverse">Should we inverse the condition</param>
+        /// <param name="inverse">Should we inverse the result condition. Invert the final result after <i>conditionalSourceFieldInverseBools</i> has been considered</param>
         public ConditionalHideAttribute(string[] conditionalSourceFields, bool[] conditionalSourceFieldInverseBools, bool hideInInspector, bool inverse)
         {
             this.ConditionalSourceFields = conditionalSourceFields;
             this.ConditionalSourceFieldInverseBools = conditionalSourceFieldInverseBools;
             this.HideInInspector = hideInInspector;
-            this.Inverse = inverse; // TODO: What's the point of having this here since we should use conditionalSourceFieldInverseBools ?
+            this.Inverse = inverse;
         }
     } 
 }
