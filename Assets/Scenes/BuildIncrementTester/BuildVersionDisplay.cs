@@ -1,18 +1,21 @@
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
-public class BuildVersionDisplay : MonoBehaviour
+namespace RS.Example
 {
-    private TextMeshProUGUI _versionText;
-
-    private void Awake()
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public class BuildVersionDisplay : MonoBehaviour
     {
-        _versionText = GetComponent<TextMeshProUGUI>();
-    }
+        private TextMeshProUGUI _versionText;
 
-    void Start()
-    {
-        _versionText.SetText($"Build version: {Application.version}");
-    }
+        private void Awake()
+        {
+            _versionText = GetComponent<TextMeshProUGUI>();
+        }
+
+        void Start()
+        {
+            _versionText.SetText($"Build version: {Application.version}");
+        }
+    } 
 }
