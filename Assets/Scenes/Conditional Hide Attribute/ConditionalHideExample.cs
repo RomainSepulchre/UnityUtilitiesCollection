@@ -154,28 +154,25 @@ namespace RS.Example
 
         [Space(30)]
 
-        [Header("Hide/Disable field without condition")]
-        [ConditionalHide(false)]
-        public int intDisabled;
-        [ConditionalHide(true)]
-        public int intHidden; // Should not be seen in the inspector since its hidden
+        [Header("Use OR logic instead of AND logic for multi-conditions")]
+        public bool OrLogicConditionA;
+        public bool OrLogicConditionB;
 
-        [Space(30)]
-
-        [Header("Test specific constructors")]
-        public bool testConditionA;
-        public bool testConditionB;
-
-        // Should be disabled when condition not met
-        [ConditionalHide(new string[] { nameof(testConditionA), nameof(testConditionB) })]
-        public int intCtrOnlyConditionArray;
-
-        // Should be hiddent when condition not met
-        [ConditionalHide(new string[] { nameof(testConditionA), nameof(testConditionB) }, true)]
-        public int intCtrConditionArrayAndHideBool;
-
-        //
-        [ConditionalHide(ConditionalSourceField = nameof(testConditionA))]
-        public int intCondProp; // Should not be seen in the inspector since its hidden
+        [ConditionalHide(new string[] { nameof(OrLogicConditionA), nameof(OrLogicConditionB) }, UseOrLogic = true)]
+        public int SomeIntG;
+        [ConditionalHide(new string[] { nameof(OrLogicConditionA), nameof(OrLogicConditionB) }, UseOrLogic = true)]
+        public bool UseSomethingG;
+        [ConditionalHide(new string[] { nameof(OrLogicConditionA), nameof(OrLogicConditionB) }, UseOrLogic = true)]
+        public string SomeStringG;
+        [ConditionalHide(new string[] { nameof(OrLogicConditionA), nameof(OrLogicConditionB) }, UseOrLogic = true)]
+        public Vector3 PositionG;
+        [ConditionalHide(new string[] { nameof(OrLogicConditionA), nameof(OrLogicConditionB) }, UseOrLogic = true)]
+        public GameObject GameObjectG;
+        [ConditionalHide(new string[] { nameof(OrLogicConditionA), nameof(OrLogicConditionB) }, UseOrLogic = true)]
+        public List<float> FloatListG;
+        [ConditionalHide(new string[] { nameof(OrLogicConditionA), nameof(OrLogicConditionB) }, UseOrLogic = true)]
+        public string[] StringArrayG;
+        [ConditionalHide(new string[] { nameof(OrLogicConditionA), nameof(OrLogicConditionB) }, UseOrLogic = true)]
+        public SerializedClass SerializedClassG;
     } 
 }
