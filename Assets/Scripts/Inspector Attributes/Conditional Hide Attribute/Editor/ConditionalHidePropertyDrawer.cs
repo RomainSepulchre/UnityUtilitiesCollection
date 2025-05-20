@@ -40,21 +40,7 @@ namespace RS.Utilities.Editor
                 //The property is not being drawn
                 //We want to undo the spacing added before and after the property
                 return -EditorGUIUtility.standardVerticalSpacing;
-                //return 0.0f;
             }
-
-            /*
-            //Get the base height when not expanded
-            var height = base.GetPropertyHeight(property, label);
-
-            // if the property is expanded go through all its children and get their height
-            if (property.isExpanded)
-            {
-                var propEnum = property.GetEnumerator();
-                while (propEnum.MoveNext())
-                    height += EditorGUI.GetPropertyHeight((SerializedProperty)propEnum.Current, GUIContent.none, true);
-            }
-            return height;*/
         }
 
         /// <summary>
