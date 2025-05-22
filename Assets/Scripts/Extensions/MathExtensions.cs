@@ -11,6 +11,17 @@ namespace RS.Extensions
         // Squared magnitude
 
         /// <summary>
+        /// Calculate the squared magnitude between this transform position and <i>'target'</i> Transform position
+        /// </summary>
+        /// <param name="tf">Transform that calls the extension method</param>
+        /// <param name="target">Transform we want to calculate squared magnitude with</param>
+        /// <returns>Squared magnitude between this transform position and <i>'target'</i> Transform position</returns>
+        public static float SqrMagnitudeWith(this Transform tf, Transform target)
+        {
+            return tf.position.SqrMagnitudeWith(target.position);
+        }
+
+        /// <summary>
         /// Calculate the squared magnitude between this transform position and <i>'target'</i> Vector3
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
@@ -33,6 +44,17 @@ namespace RS.Extensions
         }
 
         // Squared magnitude/magnitude on X and Z axis
+
+        /// <summary>
+        /// Calculate the squared magnitude on X and Z axis between this transform position and <i>'target'</i> Transform position
+        /// </summary>
+        /// <param name="tf">Transform that calls the extension method</param>
+        /// <param name="target">Transform we want to calculate squared magnitude with</param>
+        /// <returns>Squared magnitude on X and Z axis between this transform position and <i>'target'</i> Transform position</returns>
+        public static float XzSqrMagnitudeWith(this Transform tf, Transform target)
+        {
+            return tf.position.XzSqrMagnitudeWith(target.position);
+        }
 
         /// <summary>
         /// Calculate the squared magnitude on X and Z axis between this transform position and <i>'target'</i> Vector3
@@ -79,6 +101,17 @@ namespace RS.Extensions
         // Squared magnitude/magnitude on X and Y axis
 
         /// <summary>
+        /// Calculate the squared magnitude on X and Y axis between this transform position and <i>'target'</i> Transform position
+        /// </summary>
+        /// <param name="tf">Transform that calls the extension method</param>
+        /// <param name="target">Transform we want to calculate squared magnitude with</param>
+        /// <returns>Squared magnitude on X and Y axis between this transform position and <i>'target'</i> Transform position</returns>
+        public static float XySqrMagnitudeWith(this Transform tf, Transform target)
+        {
+            return tf.position.XySqrMagnitudeWith(target.position);
+        }
+
+        /// <summary>
         /// Calculate the squared magnitude on X and Y axis between this transform position and <i>'target'</i> Vector3
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
@@ -121,6 +154,17 @@ namespace RS.Extensions
         }
 
         // Squared magnitude/magnitude on Y and Z axis
+
+        /// <summary>
+        /// Calculate the squared magnitude on Y and Z axis between this transform position and <i>'target'</i> Transform position
+        /// </summary>
+        /// <param name="tf">Transform that calls the extension method</param>
+        /// <param name="target">Transform we want to calculate squared magnitude with</param>
+        /// <returns>Squared magnitude on Y and Z axis between this transform position and <i>'target'</i> Transform position</returns>
+        public static float YzSqrMagnitudeWith(this Transform tf, Transform target)
+        {
+            return tf.position.YzSqrMagnitudeWith(target.position);
+        }
 
         /// <summary>
         /// Calculate the squared magnitude on Y and Z axis between this transform position and <i>'target'</i> Vector3
@@ -206,12 +250,24 @@ namespace RS.Extensions
         #region Angle and Rotation
 
         // TODO: Add other axis (enum param in method) ?
+
         /// <summary>
-        /// Progressively rotate this transform toward <i>'target'</i> Vector3 in Y axis at a max of <i>'rate'</i> percent (0 to 1)
+        /// Progressively rotate this transform toward <i>'target'</i> Transform position in Y axis at a max of <i>'rate'</i> percent (0 to 1.0)
+        /// </summary>
+        /// <param name="tf">Transform that calls the extension method</param>
+        /// <param name="target">Transform to look at</param>
+        /// <param name="rate">Percent of the angle to turn (0 to 1.0)</param>
+        public static void RotateTowardPercent(this Transform tf, Transform target, float rate)
+        {
+            tf.RotateTowardPercent(target.position, rate);
+        }
+
+        /// <summary>
+        /// Progressively rotate this transform toward <i>'target'</i> Vector3 in Y axis at a max of <i>'rate'</i> percent (0 to 1.0)
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Position to look at</param>
-        /// <param name="rate">Percent of the angle to turn (0 to 1)</param>
+        /// <param name="rate">Percent of the angle to turn (0 to 1.0)</param>
         public static void RotateTowardPercent(this Transform tf, Vector3 target, float rate)
         {
             Vector3 toTargetVector = target - tf.position;
@@ -229,6 +285,17 @@ namespace RS.Extensions
             float rotationAngle = currentAngle * rate;
 
             tf.Rotate(Vector3.up * crossY, rotationAngle);
+        }
+
+        /// <summary>
+        /// Progressively rotate this transform toward <i>'target'</i> Transform position in Y axis at a max of <i>'rate'</i> degree (0 to 180)
+        /// </summary>
+        /// <param name="tf">Transform that calls the extension method</param>
+        /// <param name="target">Transform to look at</param>
+        /// <param name="rate">Max angular movement in degrees per seconds (0 to 180)</param>
+        public static void RotateToward(this Transform tf, Transform target, float rate)
+        {
+            tf.RotateToward(target.position, rate);
         }
 
         /// <summary>
@@ -257,6 +324,16 @@ namespace RS.Extensions
         }
 
         /// <summary>
+        /// Instantly rotate this transform toward <i>'target'</i> Transform position in Y axis only
+        /// </summary>
+        /// <param name="tf">Transform that calls the extension method</param>
+        /// <param name="target">Transform to look at</param>
+        public static void RotateToward(this Transform tf, Transform target)
+        {
+            tf.RotateToward(target.position);
+        }
+
+        /// <summary>
         /// Instantly rotate this transform toward <i>'target'</i> in Y axis only
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
@@ -267,7 +344,18 @@ namespace RS.Extensions
         }
 
         /// <summary>
-        /// Calcute the angle between 2 positions: this transform position and <i>'target'</i> Vector3 in Y axis
+        /// Calcute the angle between this transform forward and the direction of <i>'target'</i> Transform position in Y axis
+        /// </summary>
+        /// <param name="tf">Transform that calls the extension method</param>
+        /// <param name="target">Transform we want to calculate the angle with</param>
+        /// <returns>Angle between this transform position and <i>'target'</i> Transform position in degree</returns>
+        public static float AngleWith(this Transform tf, Transform target)
+        {
+            return tf.AngleWith(target.position);
+        }
+
+        /// <summary>
+        /// Calcute the angle between this transform forward and the direction of <i>'target'</i> Vector3 in Y axis
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Position we want to calculate the angle with</param>
