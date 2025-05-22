@@ -251,6 +251,8 @@ namespace RS.Extensions
 
         // TODO: Add other axis (enum param in method) ?
 
+        // Rotate toward
+
         /// <summary>
         /// Progressively rotate this transform toward <i>'target'</i> Transform position in Y axis at a max of <i>'rate'</i> percent (0 to 1.0)
         /// </summary>
@@ -343,23 +345,25 @@ namespace RS.Extensions
             tf.RotateToward(target, 180f);
         }
 
+        // Calculate angle
+
         /// <summary>
-        /// Calcute the angle between this transform forward and the direction of <i>'target'</i> Transform position in Y axis
+        /// Calcute the angle between this transform forward and the direction of <i>'target'</i> Transform position around Y axis
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Transform we want to calculate the angle with</param>
-        /// <returns>Angle between this transform position and <i>'target'</i> Transform position in degree</returns>
+        /// <returns>Angle (in degree) between this transform position and <i>'target'</i> Transform position around Y axis </returns>
         public static float AngleWith(this Transform tf, Transform target)
         {
             return tf.AngleWith(target.position);
         }
 
         /// <summary>
-        /// Calcute the angle between this transform forward and the direction of <i>'target'</i> Vector3 in Y axis
+        /// Calcute the angle between this transform forward and the direction of <i>'target'</i> Vector3 around Y axis
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Position we want to calculate the angle with</param>
-        /// <returns>Angle between this transform position and <i>'target'</i> Vector3 in degree</returns>
+        /// <returns>Angle (in degree) between this transform position and <i>'target'</i> Vector3 around Y axis</returns>
         public static float AngleWith(this Transform tf, Vector3 target)
         {
             Vector3 toTargetVector = target - tf.position;
@@ -371,14 +375,14 @@ namespace RS.Extensions
             //Right hand rule to check if the direction is to the right or to the left;
             float crossY = Vector3.Cross(tf.forward, toTargetVector).y > 0 ? 1f : -1f;
             return currentAngle * (crossY > 0 ? 1 : -1);
-        }    
+        }
 
         /// <summary>
-        /// Calculate the angle between 2 Vector3: this Vector3 and another Vector3 in Y axis
+        /// Calculate the angle between 2 Vector3: this Vector3 and another Vector3 around Y axis
         /// </summary>
         /// <param name="forward">Vector3 that calls the extension method, we consider it as a forward vector</param>
         /// <param name="vector">Position we want to calculate the angle with</param>
-        /// <returns>Angle between this Vector3 and another Vector3 in the Y axis in degree</returns>
+        /// <returns>Angle (in degree) between this Vector3 and another Vector3 around the Y axis</returns>
         public static float AngleWith(this Vector3 forward, Vector3 vector)
         {
             forward = forward.normalized;
@@ -396,10 +400,10 @@ namespace RS.Extensions
         }
 
         /// <summary>
-        /// Calculate this Vector3 angle from Vector3.Forward in Y axis
+        /// Calculate this Vector3 angle from Vector3.Forward around Y axis
         /// </summary>
         /// <param name="v">Vector3 that calls the extension method</param>
-        /// <returns>Angle between this Vector3 and Vector3.Forward in the Y axis in degree</returns>
+        /// <returns>Angle (in degree) between this Vector3 and Vector3.Forward around the Y axis</returns>
         public static float Angle(this Vector3 v)
         {
             v = v.normalized;
@@ -410,6 +414,8 @@ namespace RS.Extensions
             float crossY = Vector3.Cross(Vector3.forward, v).y > 0 ? 1f : -1f;
             return currentAngle * (crossY > 0 ? 1 : -1);
         }
+
+        // Set local angle
 
         /// <summary>
         /// Set the local X axis rotation (in degree)
