@@ -19,6 +19,12 @@ namespace RS.Example
             public string[] StringArray;
         }
 
+        public enum ExampleEnum
+        {
+            FloatField,
+            IntField
+        }
+
         [Header("Conditional hide")]
         public bool ConditionToShow;
 
@@ -174,5 +180,25 @@ namespace RS.Example
         public string[] StringArrayG;
         [ConditionalHide(new string[] { nameof(OrLogicConditionA), nameof(OrLogicConditionB) }, UseOrLogic = true)]
         public SerializedClass SerializedClassG;
+
+        [Space(30)]
+        [Header("Use enum as condition (each enum state enable the corresponding field)")]
+        public ExampleEnum ConditionEnum;
+
+        [ConditionalHide(nameof(ConditionEnum), ExampleEnum.IntField)]
+        public int SomeIntH;
+        [ConditionalHide(nameof(ConditionEnum), ExampleEnum.FloatField)]
+        public int SomeFloatH;
+
+        [Space(30)]
+        [Header("Multi-condition with enum (both enum must have the same value to enable the corresponding field)")]
+        public ExampleEnum ConditionEnumA;
+        public ExampleEnum ConditionEnumB;
+
+        [ConditionalHide(new string[] { nameof(ConditionEnumA), nameof(ConditionEnumB) } , new object[] { ExampleEnum.IntField, ExampleEnum.IntField } )]
+        public int SomeIntI;
+        [ConditionalHide(new string[] { nameof(ConditionEnumA), nameof(ConditionEnumB) }, new object[] { ExampleEnum.FloatField, ExampleEnum.FloatField })]
+        public int SomeFloatI;
+
     } 
 }

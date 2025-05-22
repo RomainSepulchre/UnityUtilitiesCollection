@@ -310,6 +310,13 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     FloatList: []
     StringArray: []
+  ConditionEnum: 0
+  SomeIntH: 0
+  SomeFloatH: 0
+  ConditionEnumA: 0
+  ConditionEnumB: 0
+  SomeIntI: 0
+  SomeFloatI: 0
 --- !u!4 &110418201
 Transform:
   m_ObjectHideFlags: 0
