@@ -152,9 +152,7 @@ MonoBehaviour:
   TransformB: {fileID: 1558796241}
   CubeTf: {fileID: 880031713}
   RotateToward: {fileID: 563641796}
-  UseCubeScale: 0
-  UseCubeRotation: 0
-  RotateMode: 0
+  RotateMode: 1
   RotatePercentage: 0.01
   RotateDegree: 0.1
   SqMagnitudeAToBWithTransform: 0
@@ -174,7 +172,9 @@ MonoBehaviour:
   YAngleAToB: 0
   YAngleBetweenAAndBForward: 0
   YAngleOfA: 0
+  EnableCubeScale: 0
   CubeLocalScale: {x: 0, y: 0, z: 0}
+  EnableCubeRotation: 0
   CubeLocalEulerAngles: {x: 0, y: 0, z: 0}
 --- !u!4 &342064682
 Transform:

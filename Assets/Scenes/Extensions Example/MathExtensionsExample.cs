@@ -19,11 +19,11 @@ namespace RS.Example
         public Transform CubeTf;
         public Transform RotateToward;
 
-        [Header("Options")]
-        public bool UseCubeScale;
-        public bool UseCubeRotation;
+        [Header("Rotate Toward Options")]
         public RotateTowardMode RotateMode;
+        [ConditionalHide(nameof(RotateMode), RotateTowardMode.ByPercentStep)]
         [AsPercentage] public float RotatePercentage;
+        [ConditionalHide(nameof(RotateMode), RotateTowardMode.ByDegreeStep)]
         [Range(0, 180)]public float RotateDegree;
 
 
@@ -60,12 +60,16 @@ namespace RS.Example
         public float YAngleBetweenAAndBForward;
         public float YAngleOfA;
 
-        [ConditionalHide(nameof(UseCubeScale))]
+        
         [Header("Set Local Scale: move Cube to update its scale (scale is tied to position and clamped to a minimum of 0.1f)")]
+        public bool EnableCubeScale;
+        [ConditionalHide(nameof(EnableCubeScale), true)]
         public Vector3 CubeLocalScale;
 
-        [ConditionalHide(nameof(UseCubeRotation))]
+        
         [Header("Set Local Angle: move Cube to update its rotation (rotation is tied to position)")]
+        public bool EnableCubeRotation;
+        [ConditionalHide(nameof(EnableCubeRotation), true)]
         public Vector3 CubeLocalEulerAngles;
 
         void Update()
@@ -98,7 +102,7 @@ namespace RS.Example
             YAngleOfA = TransformA.position.Angle();
 
             // Change Cube Scale
-            if(UseCubeScale)
+            if(EnableCubeScale)
             {
                 CubeTf.SetLocalScaleX(Mathf.Clamp(CubeTf.position.x * Mathf.Sign(CubeTf.position.x), 0.1f, float.PositiveInfinity));
                 CubeTf.SetLocalScaleY(Mathf.Clamp(CubeTf.position.y * Mathf.Sign(CubeTf.position.y), 0.1f, float.PositiveInfinity));
@@ -107,7 +111,7 @@ namespace RS.Example
             CubeLocalScale = CubeTf.localScale;
 
             // Change Cube Scale
-            if(UseCubeRotation)
+            if(EnableCubeRotation)
             {
                 // *25f to make rotation more visible
                 CubeTf.SetLocalRotationX(CubeTf.position.x * 25f);
