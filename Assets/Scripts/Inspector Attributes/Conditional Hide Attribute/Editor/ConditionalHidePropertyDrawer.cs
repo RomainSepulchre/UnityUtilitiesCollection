@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -79,7 +80,7 @@ namespace RS.Utilities.Editor
 
             if (sourcePropertyValue != null)
             {
-                enabled = GetConditionFromPropertyType(sourcePropertyValue);
+                enabled = GetConditionFromPropertyType(sourcePropertyValue, condHAtt.ObjToCompare);
             }
             else
             {
@@ -89,6 +90,7 @@ namespace RS.Utilities.Editor
             //Handle the unlimited property array
             string[] conditionalSourceFieldArray = condHAtt.ConditionalSourceFields;
             bool[] conditionalSourceFieldInverseArray = condHAtt.ConditionalSourceFieldInverseBools;
+            object[] conditionalSourceFieldsObjsToCompare = condHAtt.ConditionalSourceFieldsObjsToCompare;
             for (int index = 0; index < conditionalSourceFieldArray.Length; ++index)
             {
                 SerializedProperty sourcePropertyValueFromArray = null;
@@ -114,7 +116,8 @@ namespace RS.Utilities.Editor
                 //Combine the results
                 if (sourcePropertyValueFromArray != null)
                 {
-                    bool propertyEnabled = GetConditionFromPropertyType(sourcePropertyValueFromArray);
+                    object objToCompare = conditionalSourceFieldsObjsToCompare.Length >= (index + 1) ? conditionalSourceFieldsObjsToCompare[index] : null;
+                    bool propertyEnabled = GetConditionFromPropertyType(sourcePropertyValueFromArray, objToCompare);
                     if (conditionalSourceFieldInverseArray.Length >= (index + 1) && conditionalSourceFieldInverseArray[index]) propertyEnabled = !propertyEnabled;
 
                     if (condHAtt.UseOrLogic)
@@ -140,19 +143,140 @@ namespace RS.Utilities.Editor
         /// </summary>
         /// <param name="sourcePropertyValue">Serialized property of our condition field</param>
         /// <returns>Condition to show/enable field</returns>
-        private bool GetConditionFromPropertyType(SerializedProperty sourcePropertyValue)
+        private bool GetConditionFromPropertyType(SerializedProperty sourcePropertyValue, object objToCompare)
         {
             //Note: add others for custom handling if desired
             switch (sourcePropertyValue.propertyType)
             {
+                // MAIN PROPERTY TYPE
+
                 case SerializedPropertyType.Boolean:
-                    return sourcePropertyValue.boolValue;
+                    if (objToCompare != null && objToCompare is bool)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.boolValue.ToString();
+                    }
+                    else return sourcePropertyValue.boolValue;
+
                 case SerializedPropertyType.ObjectReference:
-                    return sourcePropertyValue.objectReferenceValue != null;
+                    if (objToCompare != null) // If there is an object to compare, check if it's the same object
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.objectReferenceValue.ToString();
+                    }
+                    else return sourcePropertyValue.objectReferenceValue != null; // By default, check if an object is assigned
+
+                case SerializedPropertyType.Enum:
+                    if (objToCompare != null && objToCompare is Enum)
+                    {
+                        string enumPropValue = sourcePropertyValue.enumNames.Length == 0 ? "undefined" : sourcePropertyValue.enumNames[sourcePropertyValue.enumValueIndex];
+                        return objToCompare.ToString() == enumPropValue;
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);
+
+                // OTHER PROPERTY TYPES
+
+                case SerializedPropertyType.String:
+                    if (objToCompare != null && objToCompare is String)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.stringValue;
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);
+
+                case SerializedPropertyType.Integer:
+                    if (objToCompare != null && objToCompare is int)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.intValue.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);
+
+                case SerializedPropertyType.Float:
+                    if (objToCompare != null && objToCompare is float)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.floatValue.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);  
+
+                case SerializedPropertyType.Color:
+                    if (objToCompare != null && objToCompare is Color)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.colorValue.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);              
+
+                case SerializedPropertyType.LayerMask:
+                    if (objToCompare != null && objToCompare is LayerMask)
+                    {
+                        LayerMask mask = (LayerMask)sourcePropertyValue.intValue;
+                        return objToCompare.ToString() == mask.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);
+
+                case SerializedPropertyType.Vector2:
+                    if (objToCompare != null && objToCompare is Vector2)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.vector2Value.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);   
+
+                case SerializedPropertyType.Vector3:
+                    if (objToCompare != null && objToCompare is Vector3)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.vector3Value.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);   
+
+                case SerializedPropertyType.Vector4:
+                    if (objToCompare != null && objToCompare is Vector4)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.vector4Value.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);
+                    
+                case SerializedPropertyType.Rect:
+                    if (objToCompare != null && objToCompare is Rect)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.rectValue.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);                  
+
+                case SerializedPropertyType.ArraySize:
+                    if (objToCompare != null)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.arraySize.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);
+                    
+                case SerializedPropertyType.Character:
+                    if (objToCompare != null && objToCompare is char)
+                    {
+                        char charPropValue = (char)sourcePropertyValue.intValue;
+                        return objToCompare.ToString() == charPropValue.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type); 
+
+                case SerializedPropertyType.AnimationCurve:
+                    if (objToCompare != null && objToCompare is AnimationCurve)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.animationCurveValue.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);
+
+                case SerializedPropertyType.Bounds:
+                    if (objToCompare != null && objToCompare is Bounds)
+                    {
+                        return objToCompare.ToString() == sourcePropertyValue.boundsValue.ToString();
+                    }
+                    else return NothingToCompareWith(sourcePropertyValue.type);       
+
                 default:
                     Debug.LogError("Data type of the property used for conditional hiding [" + sourcePropertyValue.propertyType + "] is currently not supported");
                     return true;
             }
+        }
+
+        private bool NothingToCompareWith(string type)
+        {
+            Debug.LogError($"To use a {type} as condition you must specify a {type} to compare with, ensure you specified a {type} as objToCompare in the attribute constructor.");
+            return true;
         }
     }
 }
