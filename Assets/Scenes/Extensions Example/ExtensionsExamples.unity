@@ -172,6 +172,9 @@ MonoBehaviour:
   YAngleAToB: 0
   YAngleBetweenAAndBForward: 0
   YAngleOfA: 0
+  xAxis: 0
+  yAxis: 0
+  zAxis: 0
   EnableCubeScale: 0
   CubeLocalScale: {x: 0, y: 0, z: 0}
   EnableCubeRotation: 0
@@ -730,7 +733,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558796240}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 1, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

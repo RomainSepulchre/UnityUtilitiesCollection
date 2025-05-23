@@ -256,7 +256,7 @@ namespace RS.Extensions
         // Rotate toward
 
         /// <summary>
-        /// Progressively rotate this transform toward <i>'target'</i> Transform position in Y axis at a max of <i>'rate'</i> percent (0 to 1.0)
+        /// Progressively rotate this transform toward <i>'target'</i> Transform position around Y axis at a max of <i>'rate'</i> percent (0 to 1.0)
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Transform to look at</param>
@@ -267,7 +267,7 @@ namespace RS.Extensions
         }
 
         /// <summary>
-        /// Progressively rotate this transform toward <i>'target'</i> Vector3 in Y axis at a max of <i>'rate'</i> percent (0 to 1.0)
+        /// Progressively rotate this transform toward <i>'target'</i> Vector3 around Y axis at a max of <i>'rate'</i> percent (0 to 1.0)
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Position to look at</param>
@@ -284,7 +284,7 @@ namespace RS.Extensions
 
             float currentAngle = Mathf.Acos(Mathf.Clamp(Vector3.Dot(tf.forward, toTargetVector), -1, 1)) * ONE_RADIAN_IN_DEGREE;
 
-            //Right hand rule to check if the direction is to the right or to the left;
+            //Left hand rule to check if the direction is to the right or to the left;
             float crossY = Vector3.Cross(tf.forward, toTargetVector).y > 0 ? 1f : -1f;
             float rotationAngle = currentAngle * rate;
 
@@ -292,7 +292,7 @@ namespace RS.Extensions
         }
 
         /// <summary>
-        /// Progressively rotate this transform toward <i>'target'</i> Transform position in Y axis at a max of <i>'rate'</i> degree (0 to 180)
+        /// Progressively rotate this transform toward <i>'target'</i> Transform position around Y axis at a max of <i>'rate'</i> degree (0 to 180)
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Transform to look at</param>
@@ -303,7 +303,7 @@ namespace RS.Extensions
         }
 
         /// <summary>
-        /// Progressively rotate this transform toward <i>'target'</i> Vector3 in Y axis at a max of <i>'rate'</i> degree (0 to 180)
+        /// Progressively rotate this transform toward <i>'target'</i> Vector3 around Y axis at a max of <i>'rate'</i> degree (0 to 180)
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Position to look at</param>
@@ -320,7 +320,7 @@ namespace RS.Extensions
 
             float currentAngle = Mathf.Acos(Mathf.Clamp(Vector3.Dot(tf.forward, toTargetVector), -1, 1)) * ONE_RADIAN_IN_DEGREE;
 
-            //Right hand rule to check if the direction is to the right or to the left;
+            //Left hand rule to check if the direction is to the right or to the left;
             float crossY = Vector3.Cross(tf.forward, toTargetVector).y > 0 ? 1f : -1f;
 
             if (currentAngle > rate) tf.Rotate(Vector3.up * crossY, rate);
@@ -328,7 +328,7 @@ namespace RS.Extensions
         }
 
         /// <summary>
-        /// Instantly rotate this transform toward <i>'target'</i> Transform position in Y axis only
+        /// Instantly rotate this transform toward <i>'target'</i> Transform position around Y axis only
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Transform to look at</param>
@@ -338,7 +338,7 @@ namespace RS.Extensions
         }
 
         /// <summary>
-        /// Instantly rotate this transform toward <i>'target'</i> in Y axis only
+        /// Instantly rotate this transform toward <i>'target'</i> around Y axis only
         /// </summary>
         /// <param name="tf">Transform that calls the extension method</param>
         /// <param name="target">Position to look at</param>
@@ -374,7 +374,7 @@ namespace RS.Extensions
 
             float currentAngle = Mathf.Acos(Mathf.Clamp(Vector3.Dot(tf.forward, toTargetVector), -1, 1)) * ONE_RADIAN_IN_DEGREE;
 
-            //Right hand rule to check if the direction is to the right or to the left;
+            //Left hand rule to check if the direction is to the right or to the left;
             float crossY = Vector3.Cross(tf.forward, toTargetVector).y > 0 ? 1f : -1f;
             return currentAngle * (crossY > 0 ? 1 : -1);
         }
@@ -392,7 +392,7 @@ namespace RS.Extensions
 
             float currentAngle = Mathf.Acos(Mathf.Clamp(Vector3.Dot(forward, vector), -1, 1)) * ONE_RADIAN_IN_DEGREE;
 
-            //Right hand rule to check if the direction is to the right or to the left;
+            //Left hand rule to check if the direction is to the right or to the left;
             float crossY = Vector3.Cross(forward, vector).y > 0 ? 1f : -1f;
             currentAngle *= (crossY > 0 ? 1 : -1);
             while (currentAngle > 180) currentAngle -= 360f;
@@ -412,7 +412,7 @@ namespace RS.Extensions
 
             float currentAngle = Mathf.Acos(Mathf.Clamp(Vector3.Dot(Vector3.forward, v), -1, 1)) * ONE_RADIAN_IN_DEGREE;
 
-            //Right hand rule to check if the direction is to the right or to the left;
+            //Left hand rule to check if the direction is to the right or to the left;
             float crossY = Vector3.Cross(Vector3.forward, v).y > 0 ? 1f : -1f;
             return currentAngle * (crossY > 0 ? 1 : -1);
         }

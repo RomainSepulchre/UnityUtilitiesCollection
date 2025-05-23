@@ -60,7 +60,6 @@ namespace RS.Example
         public float YAngleBetweenAAndBForward;
         public float YAngleOfA;
 
-        
         [Header("Set Local Scale: move Cube to update its scale (scale is tied to position and clamped to a minimum of 0.1f)")]
         public bool EnableCubeScale;
         [ConditionalHide(nameof(EnableCubeScale), true)]
@@ -102,7 +101,7 @@ namespace RS.Example
             YAngleOfA = TransformA.position.Angle();
 
             // Change Cube Scale
-            if(EnableCubeScale)
+            if (EnableCubeScale)
             {
                 CubeTf.SetLocalScaleX(Mathf.Clamp(CubeTf.position.x * Mathf.Sign(CubeTf.position.x), 0.1f, float.PositiveInfinity));
                 CubeTf.SetLocalScaleY(Mathf.Clamp(CubeTf.position.y * Mathf.Sign(CubeTf.position.y), 0.1f, float.PositiveInfinity));
