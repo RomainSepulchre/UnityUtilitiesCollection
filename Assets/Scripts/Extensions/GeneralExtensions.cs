@@ -1,6 +1,8 @@
 using RS.Utilities;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace RS.Extensions
@@ -76,6 +78,116 @@ namespace RS.Extensions
                 default:
                     throw new NotImplementedException();
             }
+        }
+        #endregion
+
+        #region String Manipulation
+
+        /// <summary>
+        /// Change the first character of a string to uppercase
+        /// </summary>
+        /// <param name="str">String that call the extension method</param>
+        /// <returns>Same string with the first character changed to uppercase</returns>
+        public static string UpperFirstCharacter(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
+
+            if (str.Length > 1)
+            {
+                return char.ToUpper(str[0]) + str.Substring(1);
+            }
+
+            return str.ToUpper();
+        }
+
+        /// <summary>
+        /// Change the first character of a string to lowercase
+        /// </summary>
+        /// <param name="str">String that call the extension method</param>
+        /// <returns>Same string with the first character changed to lowercase</returns>
+        public static string LowerFirstCharacter(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
+
+            if (str.Length > 1)
+            {
+                return char.ToLower(str[0]) + str.Substring(1);
+            }
+
+            return str.ToUpper();
+        }
+
+        /// <summary>
+        /// Add size rich text tag to set text size
+        /// </summary>
+        /// <param name="str">String that call the extension method</param>
+        /// <param name="size">Size to use for the rich text</param>
+        /// <param name="startIndex">Index of where the openning tag should be added</param>
+        /// <returns>Same text with the added size rich text tag</returns>
+        public static string SetRichSize(this string str, int size, int startIndex=0)
+        {
+            return str.SetRichSize(size, startIndex, str.Length - startIndex);
+        }
+
+        /// <summary>
+        /// Add <size> rich text tag to set text size
+        /// </summary>
+        /// <param name="str">String that call the extension method</param>
+        /// <param name="size">Size to use for the rich text</param>
+        /// <param name="startIndex">Index of where the openning tag should be added</param>
+        /// <param name="count">Number of character before closing the size tag</param>
+        /// <returns>Same text with the added size rich text tag</returns>
+        public static string SetRichSize(this string str, int size, int startIndex, int count)
+        {
+            StringBuilder sb = new StringBuilder(str.Substring(0, startIndex));
+
+            sb.Append($"<size={size}>");
+            sb.Append(str.Substring(startIndex, count));
+            sb.Append("</size>");
+            sb.Append(str.Substring(startIndex + count));
+
+            return sb.ToString();
+        }
+
+        #endregion
+
+        #region List
+
+        // Transform list in a string
+
+        /// <summary>
+        /// Merge all the entries in the list in a single string
+        /// </summary>
+        /// <param name="strList">List that call the extension method</param>
+        /// <param name="separator">Separator added between every entry</param>
+        /// <param name="ignoreEmptyEntries">Should we ignore the empty entries</param>
+        /// <returns>The list as a single string that merge every entries</returns>
+        public static string MergeAsString<T>(this List<T> strList, string separator = "\n", bool ignoreEmptyEntries = true)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < strList.Count; i++)
+            {
+                if (ignoreEmptyEntries && string.IsNullOrEmpty(strList[i].ToString()))
+                {
+                    continue;
+                }
+
+                if (sb.Length > 0)
+                {
+                    sb.Append(separator);
+                }
+
+                sb.Append(strList[i]);
+            }
+
+            return sb.ToString();
         }
         #endregion
     }
