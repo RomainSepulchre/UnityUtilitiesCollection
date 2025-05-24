@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /*********************************************************
@@ -28,8 +29,6 @@ public class InspectorNote : MonoBehaviour
     {
         this.enabled = false; // Disable this component when game start
     }
-
-
 
     public void SwitchToggle()
     {

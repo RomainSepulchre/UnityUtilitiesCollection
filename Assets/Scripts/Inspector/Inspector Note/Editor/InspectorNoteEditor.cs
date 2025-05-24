@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 /*********************************************************
 * 
@@ -20,7 +21,11 @@ using UnityEditor;
 public class InspectorNoteEditor : Editor
 {
     // VARIABLES
+    private InspectorNote _inspectorNote;
+
     private string _buttonText = "Start typing";
+
+    private string _previousText;
 
     private enum TypeOfNote
     {
@@ -36,60 +41,60 @@ public class InspectorNoteEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        InspectorNote inMyScript = (InspectorNote)target;
+        _inspectorNote = (InspectorNote)target;
 
-        if (!inMyScript.isReady)
+        if (!_inspectorNote.isReady)
         {
             // User adding Input text in the inspector
 
             switch (_selectedType)
             {
                 case TypeOfNote.LineLabel:
-                    if (EditorGUILayout.Toggle(inMyScript.isReady)) inMyScript.SwitchToggle();
+                    if (EditorGUILayout.Toggle(_inspectorNote.isReady)) SwitchEditToggle(false);
                     {
                         EditorGUILayout.Space(10);
-                        EditorGUILayout.LabelField(inMyScript.TextInfo); // A small line text
+                        EditorGUILayout.LabelField(_inspectorNote.TextInfo); // A small line text
                         EditorGUILayout.Space(10);
                     }
                     break;
 
                 case TypeOfNote.BoxText:
-                    if (GUILayout.Button(_buttonText)) inMyScript.SwitchToggle();
+                    if (GUILayout.Button(_buttonText)) SwitchEditToggle(false);
                     {
                         _buttonText = "INFO";
                         EditorGUILayout.Space(10);
-                        EditorGUILayout.HelpBox(inMyScript.TextInfo, MessageType.None); // This is a small box
+                        EditorGUILayout.HelpBox(_inspectorNote.TextInfo, MessageType.None); // This is a small box
                         EditorGUILayout.Space(10);
                     }
                     break;
 
                 case TypeOfNote.BoxInfo:
                 default:
-                    if (GUILayout.Button(_buttonText)) inMyScript.SwitchToggle();
+                    if (GUILayout.Button(_buttonText)) SwitchEditToggle(false);
                     {
                         _buttonText = "README";
                         EditorGUILayout.Space(10);
-                        EditorGUILayout.HelpBox(inMyScript.TextInfo, MessageType.Info); // This is a help box
+                        EditorGUILayout.HelpBox(_inspectorNote.TextInfo, MessageType.Info); // This is a help box
                         EditorGUILayout.Space(10);
                     }
                     break;
 
                 case TypeOfNote.BoxWarning:
-                    if (GUILayout.Button(_buttonText)) inMyScript.SwitchToggle();
+                    if (GUILayout.Button(_buttonText)) SwitchEditToggle(false);
                     {
                         _buttonText = "ALERT";
                         EditorGUILayout.Space(10);                                   
-                        EditorGUILayout.HelpBox(inMyScript.TextInfo, MessageType.Warning); // This is a Warning box
+                        EditorGUILayout.HelpBox(_inspectorNote.TextInfo, MessageType.Warning); // This is a Warning box
                         EditorGUILayout.Space(10);                                   
                     }
                     break;
 
                 case TypeOfNote.BoxError:
-                    if (GUILayout.Button(_buttonText)) inMyScript.SwitchToggle();
+                    if (GUILayout.Button(_buttonText)) SwitchEditToggle(false);
                     {
                         _buttonText = "ERROR";
                         EditorGUILayout.Space(10);
-                        EditorGUILayout.HelpBox(inMyScript.TextInfo, MessageType.Error); // This is a Error box
+                        EditorGUILayout.HelpBox(_inspectorNote.TextInfo, MessageType.Error); // This is a Error box
                         EditorGUILayout.Space(10);
                     }
                     break;                
@@ -102,12 +107,12 @@ public class InspectorNoteEditor : Editor
             _buttonText = "LOCK";
 
             // Display [ LOCK ] Button and switch if is press
-            if (GUILayout.Button(_buttonText)) inMyScript.SwitchToggle();
+            if (GUILayout.Button(_buttonText)) SwitchEditToggle(true);
 
             EditorGUILayout.Space(10);
             
             // [ Input text ]
-            inMyScript.TextInfo = EditorGUILayout.TextArea(inMyScript.TextInfo, GUILayout.MinHeight(50));
+            _inspectorNote.TextInfo = EditorGUILayout.TextArea(_inspectorNote.TextInfo, GUILayout.MinHeight(50));
 
             EditorGUILayout.Space(10);
 
@@ -118,6 +123,24 @@ public class InspectorNoteEditor : Editor
 
             // warning
             EditorGUILayout.HelpBox(" Press LOCK at the top when finish. ", MessageType.Warning); // A Warning box
+        }  
+    }
+
+    private void SwitchEditToggle(bool isInEditMode)
+    {
+        if(isInEditMode)
+        {
+            if (_previousText != _inspectorNote.TextInfo)
+            {
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                _previousText = _inspectorNote.TextInfo;
+            }
         }
+        else
+        {
+            _previousText = _inspectorNote.TextInfo;
+        }
+
+        _inspectorNote.SwitchToggle();
     }
 }
