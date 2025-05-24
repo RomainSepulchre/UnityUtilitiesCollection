@@ -164,17 +164,18 @@ namespace RS.Extensions
         /// <summary>
         /// Merge all the entries in the list in a single string
         /// </summary>
-        /// <param name="strList">List that call the extension method</param>
+        /// <typeparam name="T">Type contained in the list</typeparam>
+        /// <param name="list">List that call the extension method</param>
         /// <param name="separator">Separator added between every entry</param>
         /// <param name="ignoreEmptyEntries">Should we ignore the empty entries</param>
         /// <returns>The list as a single string that merge every entries</returns>
-        public static string MergeAsString<T>(this List<T> strList, string separator = "\n", bool ignoreEmptyEntries = true)
+        public static string MergeAsString<T>(this List<T> list, string separator = "\n", bool ignoreEmptyEntries = true)
         {
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i < strList.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (ignoreEmptyEntries && string.IsNullOrEmpty(strList[i].ToString()))
+                if (ignoreEmptyEntries && string.IsNullOrEmpty(list[i].ToString()))
                 {
                     continue;
                 }
@@ -184,7 +185,42 @@ namespace RS.Extensions
                     sb.Append(separator);
                 }
 
-                sb.Append(strList[i]);
+                sb.Append(list[i]);
+            }
+
+            return sb.ToString();
+        }
+        #endregion
+
+        #region Array
+
+        // Transform array in a string
+
+        /// <summary>
+        /// Merge all the entries in the array in a single string
+        /// </summary>
+        /// <typeparam name="T">Type contained in the array<</typeparam>
+        /// <param name="array">Array that call the extension method</param>
+        /// <param name="separator">Separator added between every entry</param>
+        /// <param name="ignoreEmptyEntries">Should we ignore the empty entries</param>
+        /// <returns>The array as a single string that merge every entries</returns>
+        public static string MergeAsString<T>(this T[] array, string separator = "\n", bool ignoreEmptyEntries = true)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (ignoreEmptyEntries && string.IsNullOrEmpty(array[i].ToString()))
+                {
+                    continue;
+                }
+
+                if (sb.Length > 0)
+                {
+                    sb.Append(separator);
+                }
+
+                sb.Append(array[i]);
             }
 
             return sb.ToString();
