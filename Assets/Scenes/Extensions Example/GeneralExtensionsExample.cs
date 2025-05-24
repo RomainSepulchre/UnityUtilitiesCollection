@@ -8,46 +8,38 @@ using UnityEngine;
 public class GeneralExtensionsExample : MonoBehaviour
 {
     [Header("List as strings: play scene to see results in readonly fields")]
-    [InspectorReadOnly]
-    public bool IgnoreMeIJustMakeHeaderVisible; // Only to show header
+    [InspectorHide] public bool IgnoreMeIJustMakeHeaderVisible; // Only to show header
 
     public List<string> MyStringList;
-    [InspectorReadOnly]
-    public string stringMergedList;
+    [InspectorReadOnly] public string stringMergedList;
 
     public List<int> MyIntList;
-    [InspectorReadOnly]
-    public string intMergedList;
+    [InspectorReadOnly] public string intMergedList;
 
     public List<float> MyFloatList;
-    [InspectorReadOnly]
-    public string floatMergedList;
+    [InspectorReadOnly] public string floatMergedList;
 
     public List<Vector3> MyV3List;
-    [InspectorReadOnly]
-    public string Vector3MergedList;
+    [InspectorReadOnly] public string Vector3MergedList;
 
     public List<GameObject> MyGOList;
-    [InspectorReadOnly]
-    public string GOMergedList;
+    [InspectorReadOnly] public string GOMergedList;
 
     [Space(20)]
 
     [Header("String Manipulation: play scene to see results in readonly fields")]
     public string FirstCharLowerCase;
-    [InspectorReadOnly]
-    public string FirstCharSetToUpperCase;
+    [InspectorReadOnly] public string FirstCharSetToUpperCase;
 
     [Space(20)]
 
     public string FirstCharUpperCase;
-    [InspectorReadOnly]
-    public string FirstCharSetToLowerCase;
+    [InspectorReadOnly] public string FirstCharSetToLowerCase;
 
     [Space(20)]
     public TMP_Text AddSizeTagText;
     public string AddSizeTagBefore;
-    public string AddSizeTagAfter;
+    [InspectorReadOnly] public string AddSizeTagAfter;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
