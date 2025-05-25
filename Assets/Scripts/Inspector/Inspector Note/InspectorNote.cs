@@ -26,6 +26,8 @@ namespace RS.Utilities
     {
         public bool isReady = true;
 
+        public int noteType = 2; // Default is BoxInfo see InspectorNoteEditor TypeOfNote enum
+
         public string TextInfo = "Type your message here and press enter to send";
 
         public string spaceMessage = ""; // use in case of space or message

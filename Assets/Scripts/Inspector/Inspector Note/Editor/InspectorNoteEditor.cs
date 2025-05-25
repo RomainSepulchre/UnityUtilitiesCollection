@@ -27,8 +27,6 @@ namespace RS.Utilities.Editor
 
         private string _buttonText = "Start typing";
 
-        private string _previousText;
-
         private enum TypeOfNote
         {
 
@@ -41,10 +39,14 @@ namespace RS.Utilities.Editor
 
         private TypeOfNote _selectedType = TypeOfNote.BoxInfo;
 
-        public override void OnInspectorGUI()
+        private void OnEnable()
         {
             _inspectorNote = (InspectorNote)target;
+            _selectedType = (TypeOfNote)_inspectorNote.noteType;
+        }
 
+        public override void OnInspectorGUI()
+        {
             if (!_inspectorNote.isReady)
             {
                 // User adding Input text in the inspector
@@ -120,6 +122,7 @@ namespace RS.Utilities.Editor
 
                 // selection
                 _selectedType = (TypeOfNote)EditorGUILayout.EnumPopup("Type of note: ", _selectedType);
+                _inspectorNote.noteType = (int)_selectedType;
 
                 EditorGUILayout.Space(10);
 
@@ -132,16 +135,9 @@ namespace RS.Utilities.Editor
         {
             if (isInEditMode)
             {
-                if (_previousText != _inspectorNote.TextInfo)
-                {
-                    EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-                    _previousText = _inspectorNote.TextInfo;
-                }
-            }
-            else
-            {
-                _previousText = _inspectorNote.TextInfo;
-            }
+                // Make scene dirty everytime we lock note, to be sure any change will be saved
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            }    
 
             _inspectorNote.SwitchToggle();
         }
