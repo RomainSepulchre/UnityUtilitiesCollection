@@ -453,6 +453,147 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &684600410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 684600412}
+  - component: {fileID: 684600411}
+  m_Layer: 0
+  m_Name: Function Caller Example
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &684600411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684600410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2cfcde730fa5840b21a9c24cec95ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - Name: Set Camera FOV to 20 (RuntimeOnly)
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 792606882}
+          m_TargetAssemblyTypeName: UnityEngine.Camera, UnityEngine
+          m_MethodName: set_fieldOfView
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 20
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Name: Set Camera FOV to 60 (RuntimeOnly)
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 792606882}
+          m_TargetAssemblyTypeName: UnityEngine.Camera, UnityEngine
+          m_MethodName: set_fieldOfView
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 60
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Name: Set Camera FOV to 90 (RuntimeOnly)
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 792606882}
+          m_TargetAssemblyTypeName: UnityEngine.Camera, UnityEngine
+          m_MethodName: set_fieldOfView
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 90
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Name: Set Camera FOV to 20 (EditorAndRuntime)
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 792606882}
+          m_TargetAssemblyTypeName: UnityEngine.Camera, UnityEngine
+          m_MethodName: set_fieldOfView
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 20
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
+  - Name: Set Camera FOV to 60 (EditorAndRuntime)
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 792606882}
+          m_TargetAssemblyTypeName: UnityEngine.Camera, UnityEngine
+          m_MethodName: set_fieldOfView
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 60
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
+  - Name: Set Camera FOV to 90 (EditorAndRuntime)
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 792606882}
+          m_TargetAssemblyTypeName: UnityEngine.Camera, UnityEngine
+          m_MethodName: set_fieldOfView
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 90
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
+--- !u!4 &684600412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684600410}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &792606880
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,6 +778,122 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1247373988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1247373992}
+  - component: {fileID: 1247373994}
+  - component: {fileID: 1247373993}
+  - component: {fileID: 1247373991}
+  - component: {fileID: 1247373990}
+  - component: {fileID: 1247373989}
+  m_Layer: 0
+  m_Name: Inspector Note Example
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1247373989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247373988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4c6ab3eff7d63439bb1b7ed0572259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReady: 0
+  noteType: 4
+  TextInfo: An error inspector note
+  spaceMessage: 
+--- !u!114 &1247373990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247373988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4c6ab3eff7d63439bb1b7ed0572259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReady: 0
+  noteType: 3
+  TextInfo: A warning inspector note
+  spaceMessage: 
+--- !u!114 &1247373991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247373988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4c6ab3eff7d63439bb1b7ed0572259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReady: 0
+  noteType: 2
+  TextInfo: An informative inspector note
+  spaceMessage: 
+--- !u!4 &1247373992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247373988}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1247373993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247373988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4c6ab3eff7d63439bb1b7ed0572259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReady: 0
+  noteType: 1
+  TextInfo: A text box inspector note
+  spaceMessage: 
+--- !u!114 &1247373994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247373988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4c6ab3eff7d63439bb1b7ed0572259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReady: 0
+  noteType: 0
+  TextInfo: A simple text inspector note
+  spaceMessage: 
 --- !u!1 &2090033699
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,3 +954,5 @@ SceneRoots:
   - {fileID: 1234782703}
   - {fileID: 2090033701}
   - {fileID: 75767985}
+  - {fileID: 684600412}
+  - {fileID: 1247373992}
