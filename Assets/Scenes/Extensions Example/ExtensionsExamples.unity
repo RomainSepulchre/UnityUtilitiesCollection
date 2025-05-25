@@ -1064,6 +1064,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1678951184}
   - component: {fileID: 1678951183}
+  - component: {fileID: 1678951187}
+  - component: {fileID: 1678951186}
   - component: {fileID: 1678951185}
   m_Layer: 0
   m_Name: GeneralExtensionsExample
@@ -1145,7 +1147,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Events:
-  - Name: 
+  - Name: Event #0
+    Event:
+      m_PersistentCalls:
+        m_Calls: []
+  - Name: Event #1
+    Event:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1678951186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678951182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2cfcde730fa5840b21a9c24cec95ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - Name: Event #0
+    Event:
+      m_PersistentCalls:
+        m_Calls: []
+  - Name: Event #1
+    Event:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1678951187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678951182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2cfcde730fa5840b21a9c24cec95ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Events:
+  - Name: Event #0
+    Event:
+      m_PersistentCalls:
+        m_Calls: []
+  - Name: Event #1
     Event:
       m_PersistentCalls:
         m_Calls: []

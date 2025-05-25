@@ -11,11 +11,17 @@ namespace RS.Utilities.Editor
     {
         private FunctionCaller _functionCaller;
 
+        private int _lastEventCount;
+
+        private void Reset()
+        {
+            _functionCaller = (FunctionCaller)target;
+            _lastEventCount = _functionCaller.Events.Count;
+        }
+
         public override void OnInspectorGUI()
         {
             bool isPlaying = Application.isPlaying;
-
-            _functionCaller = (FunctionCaller)target;
 
             // Draw buttons
             int eventCount = _functionCaller.Events.Count;
@@ -57,6 +63,21 @@ namespace RS.Utilities.Editor
             serializedObject.Update();
             EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(_functionCaller.Events)), true);
             serializedObject.ApplyModifiedProperties();
+
+            // Auto-name new events
+            int updatedEventCount = _functionCaller.Events.Count;
+            if (updatedEventCount > _lastEventCount)
+            {
+                string eventName = _functionCaller.Events[updatedEventCount - 1].Name;
+
+                // Rename if name is empty or same as previous entry
+                if(string.IsNullOrEmpty(eventName) || eventName == _functionCaller.Events[updatedEventCount - 2].Name)
+                { 
+                    _functionCaller.Events[updatedEventCount - 1].Name = $"Event #{updatedEventCount - 1}";
+                }
+            }
+
+            _lastEventCount = _functionCaller.Events.Count;
         }
     } 
 }

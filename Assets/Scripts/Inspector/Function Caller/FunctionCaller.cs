@@ -19,7 +19,7 @@ namespace RS.Utilities
 			public UnityEvent Event;
         }
 
-		public List<NamedEvent> Events;
+		public List<NamedEvent> Events = new List<NamedEvent>();
 
 		// TODO: Does this work if disabled
 		public void LogSomething(string log)
