@@ -15,23 +15,31 @@ using UnityEngine;
 *  Modified by Romain Sepulchre
 * *******************************************************/
 
-[AddComponentMenu("Miscellaneous/Inspector Note")]
-public class InspectorNote : MonoBehaviour
+#if UNITY_EDITOR
+namespace RS.Utilities
 {
-    public bool isReady = true;
-
-    public string TextInfo = "Type your message here and press enter to send";
-
-    public string spaceMessage = ""; // use in case of space or message
-
-
-    private void Awake()
+    /// <summary>
+    /// Keep text note on a gameObject by adding this component in the inspector
+    /// </summary>
+    [AddComponentMenu("Utilities/Inspector Note")]
+    public class InspectorNote : MonoBehaviour
     {
-        this.enabled = false; // Disable this component when game start
-    }
+        public bool isReady = true;
 
-    public void SwitchToggle()
-    {
-        isReady = !isReady;
-    }
+        public string TextInfo = "Type your message here and press enter to send";
+
+        public string spaceMessage = ""; // use in case of space or message
+
+
+        private void Awake()
+        {
+            this.enabled = false; // Disable this component when game start
+        }
+
+        public void SwitchToggle()
+        {
+            isReady = !isReady;
+        }
+    } 
 }
+#endif
