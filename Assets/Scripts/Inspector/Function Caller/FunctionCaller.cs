@@ -21,11 +21,11 @@ namespace RS.Utilities
 
 		public List<NamedEvent> Events = new List<NamedEvent>();
 
-		// TODO: Does this work if disabled
-		public void LogSomething(string log)
-		{
-			Debug.Log(log);
-		}
-	}  
+        private void Awake()
+        {
+            // Disable this component when game start, button and event works even when component is disabled
+            this.enabled = false; 
+        }
+    }  
 }
 #endif

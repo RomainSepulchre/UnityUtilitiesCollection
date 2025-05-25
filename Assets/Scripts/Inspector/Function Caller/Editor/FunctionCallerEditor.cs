@@ -1,6 +1,4 @@
-using System.Text;
 using UnityEditor;
-using UnityEditor.TerrainTools;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,7 +11,7 @@ namespace RS.Utilities.Editor
 
         private int _lastEventCount;
 
-        private void Reset()
+        private void OnEnable()
         {
             _functionCaller = (FunctionCaller)target;
             _lastEventCount = _functionCaller.Events.Count;
@@ -40,11 +38,11 @@ namespace RS.Utilities.Editor
                         validEvent++;
                         if (!isPlaying && !playModeLabelAdded)
                         {
-                            EditorGUILayout.HelpBox($"Event can only be called in Play mode", MessageType.None);
+                            EditorGUILayout.HelpBox($"RuntimeOnly events can only be called in Play mode, set the event to EditorAndRuntime if you need to call it out of Play mode.", MessageType.None);
                             playModeLabelAdded = true;
                         }
 
-                        GUI.enabled = isPlaying;
+                        GUI.enabled = isPlaying || AreEditorCompatible(ev);
                         if (GUILayout.Button(namedEvent.Name)) ev.Invoke();
                         GUI.enabled = true;
                     }
@@ -68,16 +66,29 @@ namespace RS.Utilities.Editor
             int updatedEventCount = _functionCaller.Events.Count;
             if (updatedEventCount > _lastEventCount)
             {
+
                 string eventName = _functionCaller.Events[updatedEventCount - 1].Name;
 
                 // Rename if name is empty or same as previous entry
-                if(string.IsNullOrEmpty(eventName) || eventName == _functionCaller.Events[updatedEventCount - 2].Name)
+                if(string.IsNullOrEmpty(eventName) || (updatedEventCount > 1 && eventName == _functionCaller.Events[updatedEventCount - 2].Name))
                 { 
                     _functionCaller.Events[updatedEventCount - 1].Name = $"Event #{updatedEventCount - 1}";
                 }
             }
 
             _lastEventCount = _functionCaller.Events.Count;
+        }
+
+        private bool AreEditorCompatible(UnityEvent ev)
+        {
+            for (int i = 0; i < ev.GetPersistentEventCount(); i++)
+            {
+                if(ev.GetPersistentListenerState(i) == UnityEventCallState.EditorAndRuntime)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     } 
 }
