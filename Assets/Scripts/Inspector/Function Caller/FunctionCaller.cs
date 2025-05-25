@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,9 +12,14 @@ namespace RS.Utilities
 	[AddComponentMenu("Utilities/Function Caller")]
 	public class FunctionCaller : MonoBehaviour
 	{
-		public UnityEvent Event;
+		[Serializable]
+		public class NamedEvent
+		{
+			public string Name;
+			public UnityEvent Event;
+        }
 
-		public List<UnityEvent> EventList;
+		public List<NamedEvent> Events;
 
 		// TODO: Does this work if disabled
 		public void LogSomething(string log)

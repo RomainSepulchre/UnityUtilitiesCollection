@@ -11,94 +11,52 @@ namespace RS.Utilities.Editor
     {
         private FunctionCaller _functionCaller;
 
-        private enum EventMode
-        {
-            OneEvent = 0,
-            EventList = 1,
-        }
-
-        private EventMode _selectedMode = EventMode.OneEvent;
-
         public override void OnInspectorGUI()
         {
             bool isPlaying = Application.isPlaying;
 
             _functionCaller = (FunctionCaller)target;
 
-            _selectedMode = (EventMode)EditorGUILayout.EnumPopup("Event mode: ", _selectedMode);
-
-            switch (_selectedMode)
+            // Draw buttons
+            int eventCount = _functionCaller.Events.Count;
+            if (eventCount > 0)
             {
-                case EventMode.OneEvent:
-                default:
-                    // Draw event field
-                    serializedObject.Update();
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(_functionCaller.Event)), true);
-                    serializedObject.ApplyModifiedProperties();
+                bool playModeLabelAdded = false;
+                int validEvent = 0;
 
-                    if(_functionCaller.Event.GetPersistentEventCount() > 0)
+                foreach (var namedEvent in _functionCaller.Events)
+                {
+                    UnityEvent ev = namedEvent.Event;
+                    int functionCount = ev.GetPersistentEventCount();
+
+                    if (functionCount > 0)
                     {
-                        if (!isPlaying) EditorGUILayout.LabelField($"Event can only be called in Play mode");
+                        validEvent++;
+                        if (!isPlaying && !playModeLabelAdded)
+                        {
+                            EditorGUILayout.HelpBox($"Event can only be called in Play mode", MessageType.None);
+                            playModeLabelAdded = true;
+                        }
+
                         GUI.enabled = isPlaying;
-                        if (GUILayout.Button($"Call event")) _functionCaller.Event.Invoke();
+                        if (GUILayout.Button(namedEvent.Name)) ev.Invoke();
                         GUI.enabled = true;
                     }
-                    else
-                    {
-                        EditorGUILayout.HelpBox("Add a function in the event", MessageType.Info);
-                    }
-                    break;
+                }
 
-                case EventMode.EventList:
-                    // Draw event list field
-                    serializedObject.Update();
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(_functionCaller.EventList)), true);
-                    serializedObject.ApplyModifiedProperties();
-
-                    if (_functionCaller.EventList.Count > 0)
-                    {
-                        bool playModeLabelAdded = false;
-                        
-                        for (int i = 0; i < _functionCaller.EventList.Count; i++)
-                        {
-                            UnityEvent ev = _functionCaller.EventList[i];
-                            int functionCount = ev.GetPersistentEventCount();
-                            int validEvent = 0;
-
-                            if (functionCount > 0)
-                            {
-                                if (!isPlaying && !playModeLabelAdded)
-                                {
-                                    EditorGUILayout.LabelField($"Event can only be called in Play mode");
-                                    playModeLabelAdded = true;
-                                }
-
-                                validEvent++;
-                                StringBuilder sb = new StringBuilder($"{i}: ");
-                                for (int j = 0; j < functionCount; j++)
-                                {
-                                    if (string.IsNullOrEmpty(ev.GetPersistentMethodName(j))) continue;
-                                    if(sb.Length > 0) sb.Append(" + ");
-                                    sb.Append($"{ev.GetPersistentMethodName(j)}");
-                                }
-
-                                GUI.enabled = isPlaying;
-                                if (GUILayout.Button(sb.ToString()))
-                                {
-                                    ev.Invoke();
-                                }
-                                GUI.enabled = true;
-                            }
-
-                            if(validEvent <= 0) EditorGUILayout.HelpBox("Add a function in the event", MessageType.Info);
-                        }
-                    }
-                    else
-                    {
-                        EditorGUILayout.HelpBox("Add an event in the list", MessageType.Info);
-                    }
-                    break;
+                if (validEvent <= 0) EditorGUILayout.HelpBox("Create an event, name it and set the functions you want to call.", MessageType.Info);
             }
+            else
+            {
+                EditorGUILayout.HelpBox("Create an event, name it and set the functions you want to call.", MessageType.Info);
+            }
+
+            EditorGUILayout.Space(10);
+
+            // Draw event name field
+            serializedObject.Update();
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(_functionCaller.Events)), true);
+            serializedObject.ApplyModifiedProperties();
         }
     } 
 }
