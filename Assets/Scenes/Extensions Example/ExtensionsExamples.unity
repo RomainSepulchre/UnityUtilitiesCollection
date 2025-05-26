@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -500}
+  m_AnchoredPosition: {x: 0, y: -400}
   m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &119591702
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -254,6 +254,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119591700}
+  m_CullTransparentMesh: 1
+--- !u!1 &178427920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178427921}
+  - component: {fileID: 178427923}
+  - component: {fileID: 178427922}
+  m_Layer: 5
+  m_Name: ImageSetAlpha
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &178427921
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178427920}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1364725013}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -500}
+  m_SizeDelta: {x: 300, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &178427922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178427920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &178427923
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178427920}
   m_CullTransparentMesh: 1
 --- !u!1 &342064680
 GameObject:
@@ -473,6 +548,60 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820483039}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &866126382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 866126384}
+  - component: {fileID: 866126383}
+  m_Layer: 0
+  m_Name: EnumExtensionsExample
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &866126383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866126382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fc664b13106894a87aabbbd2e0ae8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreMeIJustMakeHeaderVisibleA: 0
+  RandomEnumValue: 0
+  MyAxis: 0
+  AxisAsVector: {x: 0, y: 0, z: 0}
+  MyCurveType: 0
+  CurveXValue: 0.5
+  CurveYValue: 0
+  MyTimeType: 0
+  DeltaTimeValue: 0
+  TimeValue: 0
+--- !u!4 &866126384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866126382}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &880031709
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +1005,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 119591701}
+  - {fileID: 178427921}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1083,21 +1213,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c93020ad878f543a239e012dda36d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IgnoreMeIJustMakeHeaderVisible: 0
+  IgnoreMeIJustMakeHeaderVisibleA: 0
   MyStringList:
   - AAAAA
   - BBBBB
   - CCCCC
   - DDDDD
-  stringMergedList: 
+  StringMergedList: 
   MyIntList: 0a00000009000000866a070003000000
-  intMergedList: 
+  IntMergedList: 
   MyFloatList:
   - 0.256
   - 1.425
   - 1264.5
   - 364.1235
-  floatMergedList: 
+  FloatMergedList: 
   MyV3List:
   - {x: 452, y: 53, z: 1}
   - {x: 4, y: 23, z: 2.4}
@@ -1113,7 +1243,49 @@ MonoBehaviour:
   - A
   - B
   - C
-  stringMergedArray: 
+  StringMergedArray: 
+  IgnoreMeIJustMakeHeaderVisibleB: 0
+  ListToDeduplicate:
+  - A
+  - A
+  - B
+  - C
+  - B
+  - D
+  - A
+  - D
+  IgnoreMeIJustMakeHeaderVisibleC: 0
+  ListForLastElement:
+  - A
+  - B
+  - C
+  LastElement: 
+  ListForPopLastElement:
+  - A
+  - B
+  - C
+  PopLastElement: 
+  IgnoreMeIJustMakeHeaderVisibleD: 0
+  ListForRandomElement:
+  - A
+  - B
+  - C
+  - D
+  - E
+  RandomElement: 
+  ListForRandomPopElement:
+  - A
+  - B
+  - C
+  - D
+  - E
+  RandomPopElement: 
+  ListToShuffle:
+  - A
+  - B
+  - C
+  - D
+  - E
   FirstCharLowerCase: the first letter will be changed to upper case
   FirstCharSetToUpperCase: 
   FirstCharUpperCase: The first letter will be changed to lower case
@@ -1121,6 +1293,8 @@ MonoBehaviour:
   AddSizeTagText: {fileID: 119591702}
   AddSizeTagBefore: AAAA BBBBBBBBBB CCCC
   AddSizeTagAfter: 
+  ImageSetAlpha: {fileID: 178427922}
+  Alpha: 0.5
 --- !u!4 &1678951184
 Transform:
   m_ObjectHideFlags: 0
@@ -1282,4 +1456,5 @@ SceneRoots:
   - {fileID: 1364725013}
   - {fileID: 342064682}
   - {fileID: 1678951184}
+  - {fileID: 866126384}
   - {fileID: 1275388723}

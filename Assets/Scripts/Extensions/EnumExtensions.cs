@@ -1,6 +1,6 @@
+using RS.Utilities;
 using System;
 using UnityEngine;
-using RS.Utilities;
 
 namespace RS.Extensions
 {
@@ -8,7 +8,7 @@ namespace RS.Extensions
 	{
         #region Extends any enum
         /// <summary>
-        /// Get a random enum value from this enum type
+        /// Get a random enum value from this enum type. Only use this from an enum type.
         /// </summary>
         /// <typeparam name="T">Type of the enum</typeparam>
         /// <param name="enumType">Enum type that calls the extension method</param>
