@@ -456,5 +456,47 @@ namespace RS.Extensions
         }
         #endregion
 
+        #region Numeric value (int, float, double)
+
+        // Is In Range
+
+        /// <summary>
+        /// Check if the value is this value inside a range
+        /// </summary>
+        /// <param name="value">Float value that calls the extension method</param>
+        /// <param name="rangeMin">Minimum value of the range</param>
+        /// <param name="rangeMax">Maximum value of the range</param>
+        /// <returns>Is the value inside the range</returns>
+        public static bool IsInRange(this float value, float rangeMin, float rangeMax)
+        {
+            return value >= rangeMin && value <= rangeMax;
+        }
+
+        /// <summary>
+        /// Check if the value is this value inside a range
+        /// </summary>
+        /// <param name="value">Double value that calls the extension method</param>
+        /// <param name="rangeMin">Minimum value of the range</param>
+        /// <param name="rangeMax">Maximum value of the range</param>
+        /// <returns>Is the value inside the range</returns>
+        public static bool IsInRange(this double value, double rangeMin, double rangeMax)
+        {
+            return value >= rangeMin && value <= rangeMax;
+        }
+
+        /// <summary>
+        /// Check if the value is this value inside a range
+        /// </summary>
+        /// <param name="value">Int value that calls the extension method</param>
+        /// <param name="rangeMin">Minimum value of the range</param>
+        /// <param name="rangeMax">Maximum value of the range</param>
+        /// <returns>Is the value inside the range</returns>
+        public static bool IsInRange(this int value, int rangeMin, int rangeMax)
+        {
+            return value >= rangeMin && value <= rangeMax;
+        }
+
     }
+
+    #endregion
 }

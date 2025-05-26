@@ -387,6 +387,10 @@ MonoBehaviour:
   CubeLocalScale: {x: 0, y: 0, z: 0}
   EnableCubeRotation: 0
   CubeLocalEulerAngles: {x: 0, y: 0, z: 0}
+  RangeMinValue: 0
+  RangeMaxValue: 10
+  ValueToCheck: 3
+  IsInRange: 0
 --- !u!4 &342064682
 Transform:
   m_ObjectHideFlags: 0

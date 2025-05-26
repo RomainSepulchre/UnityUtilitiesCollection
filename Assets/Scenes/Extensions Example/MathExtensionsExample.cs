@@ -71,6 +71,12 @@ namespace RS.Example
         [ConditionalHide(nameof(EnableCubeRotation), true)]
         public Vector3 CubeLocalEulerAngles;
 
+        [Header("Value is in range")]
+        public float RangeMinValue = 0f;
+        public float RangeMaxValue = 10f;
+        public float ValueToCheck = 3f;
+        [InspectorReadOnly] public bool IsInRange;
+
         void Update()
         {
             // Global Squared Magnitude
@@ -133,6 +139,10 @@ namespace RS.Example
                     RotateToward.RotateToward(Vector3.zero);
                     break;
             }
+
+
+            // Is In Range
+            IsInRange = ValueToCheck.IsInRange(RangeMinValue, RangeMaxValue);
         }
 
         private void OnDrawGizmos()
