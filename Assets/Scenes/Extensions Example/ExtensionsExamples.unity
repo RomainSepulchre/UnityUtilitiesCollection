@@ -1109,6 +1109,11 @@ MonoBehaviour:
   - {fileID: 1275388720}
   - {fileID: 342064680}
   GOMergedList: 
+  MyStringArray:
+  - A
+  - B
+  - C
+  stringMergedArray: 
   FirstCharLowerCase: the first letter will be changed to upper case
   FirstCharSetToUpperCase: 
   FirstCharUpperCase: The first letter will be changed to lower case

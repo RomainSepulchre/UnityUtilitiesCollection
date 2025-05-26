@@ -24,6 +24,9 @@ public class GeneralExtensionsExample : MonoBehaviour
     public List<GameObject> MyGOList;
     [InspectorReadOnly] public string GOMergedList;
 
+    public string[] MyStringArray;
+    [InspectorReadOnly] public string stringMergedArray;
+
     [Space(20)]
 
     [Header("String Manipulation: play scene to see results in readonly fields")]
@@ -48,9 +51,10 @@ public class GeneralExtensionsExample : MonoBehaviour
         floatMergedList = MyFloatList.MergeAsString(" - ");
         Vector3MergedList = MyV3List.MergeAsString(" - ");
         GOMergedList = MyGOList.MergeAsString(" - ");
+        stringMergedArray = MyStringArray.MergeAsString(" - ");
         FirstCharSetToUpperCase = FirstCharLowerCase.UpperFirstCharacter();
         FirstCharSetToLowerCase = FirstCharUpperCase.LowerFirstCharacter();
-        AddSizeTagAfter = AddSizeTagBefore.SetRichSize(26, 5, 10);
+        AddSizeTagAfter = AddSizeTagBefore.SetRichSize(40, 5, 10);
         AddSizeTagText.text = AddSizeTagAfter;
     }
 
