@@ -7,12 +7,18 @@ namespace RS.Extensions
 	public static class EnumExtensions
 	{
         #region Extends any enum
-        //public static T RandomEnumElement<T>(this Type enumType)
-        //{
-        //    string[] names = Enum.GetNames(enumType);
-        //    string choice = names.RandomElement();
-        //    return (T)Enum.Parse(enumType, choice);
-        //}
+        /// <summary>
+        /// Get a random enum value from this enum type
+        /// </summary>
+        /// <typeparam name="T">Type of the enum</typeparam>
+        /// <param name="enumType">Enum type that calls the extension method</param>
+        /// <returns>A random enum value</returns>
+        public static T RandomEnumElement<T>(this Type enumType)
+        {
+            string[] names = Enum.GetNames(enumType);
+            string choice = names.RandomElement();
+            return (T)Enum.Parse(enumType, choice);
+        }
         #endregion
 
         #region Extends a specific enum

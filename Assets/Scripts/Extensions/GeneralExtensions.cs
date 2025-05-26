@@ -1,9 +1,9 @@
-using RS.Utilities;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = System.Random;
 
 namespace RS.Extensions
 {
@@ -108,12 +108,12 @@ namespace RS.Extensions
 
         #region List and Arrays (IList)
 
-        // Transform List/Array in a string
-
+        // List / Array as string
+        
         /// <summary>
-        /// Merge all the entries in the list in a single string
+        /// Merge all the entries in a single string
         /// </summary>
-        /// <typeparam name="T">Type contained in the list</typeparam>
+        /// <typeparam name="T">Type contained in the Ilist</typeparam>
         /// <param name="list">IList that call the extension method</param>
         /// <param name="separator">Separator added between every entry</param>
         /// <param name="ignoreEmptyEntries">Should we ignore the empty entries</param>
@@ -138,6 +138,142 @@ namespace RS.Extensions
             }
 
             return sb.ToString();
+        }
+
+        // List / Array De-duplication
+
+        /// <summary>
+        /// Remove any duplicate
+        /// </summary>
+        /// <typeparam name="T">Type contained in the Ilist</typeparam>
+        /// <param name="list">IList that call the extension method</param>
+        public static void RemoveDuplicate<T>(this IList<T> list)
+        {
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                for (int j = i + 1; j < list.Count; j++)
+                {
+                    if (Equals(list[i], list[j]))
+                    {
+                        list.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+        }
+
+        // List / Array Last element
+
+        /// <summary>
+        /// Get the last element
+        /// </summary>
+        /// <typeparam name="T">Type contained in the Ilist</typeparam>
+        /// <param name="list">IList that call the extension method</param>
+        /// <returns>Last element</returns>
+        public static T LastElement<T>(this IList<T> list)
+        {
+            if (list.Count == 0)
+            {
+                Debug.LogError("No element in list, returning default");
+                return default(T);
+            }
+
+            return list[list.Count - 1];
+        }
+
+        /// <summary>
+        /// Get the last element and remove it before returning it
+        /// </summary>
+        /// <typeparam name="T">Type contained in the Ilist</typeparam>
+        /// <param name="list">IList that call the extension method</param>
+        /// <returns>Last element</returns>
+        public static T PopLast<T>(this IList<T> list)
+        {
+            if (list.Count == 0)
+            {
+                Debug.LogError("No element in list, returning default");
+                return default(T);
+            }
+
+            T last = list[list.Count - 1];
+            list.RemoveAt(list.Count - 1);
+            return last;
+        }
+
+        // List / Array Randomization
+
+        private static Random _random = new Random();
+
+        /// <summary>
+        /// Get a random element
+        /// </summary>
+        /// <typeparam name="T">Type contained in the Ilist</typeparam>
+        /// <param name="list">IList that call the extension method</param>
+        /// <returns>A random element from the list</returns>
+        public static T RandomElement<T>(this IList<T> list)
+        {
+            if (list.Count == 0)
+            {
+                Debug.LogError("No element in list, returning default");
+                return default(T);
+            }
+
+            int choice = _random.Next(list.Count);
+
+            return list[choice];
+        }
+
+        /// <summary>
+        /// Get a random element and remove it before returning it
+        /// </summary>
+        /// <typeparam name="T">Type contained in the Ilist</typeparam>
+        /// <param name="list">IList that call the extension method</param>
+        /// <returns>A random element from the list</returns>
+        public static T RandomPop<T>(this IList<T> list)
+        {
+            if (list.Count == 0)
+            {
+                Debug.LogError("No element in list, returning default");
+                return default(T);
+            }
+
+            int choice = _random.Next(list.Count);
+
+            T element = list[choice];
+            list.RemoveAt(choice);
+            return element;
+        }
+
+        /// <summary>
+        /// Shuffle the elements (semi random fast shuffle)
+        /// </summary>
+        /// <typeparam name="T">Type contained in the Ilist</typeparam>
+        /// <param name="list">IList that call the extension method</param>
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = _random.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+        #endregion
+
+        #region Image
+        /// <summary>
+        /// Set the color alpha value of an image
+        /// </summary>
+        /// <param name="img">Image that call the extension method</param>
+        /// <param name="value">New color alpha value (0 to 1)</param>
+        public static void SetColorAlpha(this Image img, float value)
+        {
+            Color c = img.color;
+            c.a = value;
+            img.color = c;
         }
         #endregion
     }
