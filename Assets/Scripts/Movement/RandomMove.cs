@@ -9,29 +9,41 @@ namespace RS.Utilities
     /// </summary>
     public class RandomMove : MonoBehaviour
     {
-        // public field
-
+        /// <summary>
+        /// Movement Speed
+        /// </summary>
         public float Speed = 1;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public float MaxOffset = 10;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public float DirectionMoverTime = 1f;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Vector3 AxeMultiplier = Vector3.one;
 
+        /// <summary>
+        /// Should we randomize start position
+        /// </summary>
         public bool RandomizeOnStart;
 
         // Positions
 
-        private Vector3 _basePosition;
-
-        private Vector3 _offset;
+        private Vector3 _basePosition; // Original position
+        private Vector3 _offset; // Offset from original position
         private Vector3 _direction;
-
         private Vector3 _offsetTarget;
 
-        //
-
+        // Coroutine
         private Coroutine _directionMover = null;
+
         private float _limiter = 1f;
 
         private float _minMovementSqr;
@@ -60,6 +72,7 @@ namespace RS.Utilities
 
             UpdateOffset();
 
+            // Move object
             transform.localPosition = _basePosition + GetFinalOffset();
         }
 
@@ -81,7 +94,7 @@ namespace RS.Utilities
         }
 
         /// <summary>
-        /// Movement coroutine
+        /// Direction coroutine: set a new target and update direction toward this target
         /// </summary>
         private IEnumerator MoveDirectionCo()
         {
@@ -129,7 +142,7 @@ namespace RS.Utilities
         }
 
         /// <summary>
-        /// Randomize the offset if RandomizeOnStart is enabled
+        /// Randomize the start offset when RandomizeOnStart is enabled
         /// </summary>
         private void RandomizeStart()
         {
@@ -141,22 +154,20 @@ namespace RS.Utilities
             _offset = Random.insideUnitSphere * MaxOffset;
         }
 
-
         /// <summary>
-        /// Get the final offset
+        /// Get the final offset after we processed the axe multiplier and limiter
         /// </summary>
-        /// <returns>Final Offset</returns>
+        /// <returns>Final offset</returns>
         private Vector3 GetFinalOffset()
         {
             return Vector3.Scale(_offset, AxeMultiplier) * _limiter;
         }
 
 
-        // TODO: What is limiter, why change it
         /// <summary>
-        /// 
+        /// Set a new limiter value to limit the offset value to a percentage of it (ex: 0.5f means 50% of the offset value)
         /// </summary>
-        /// <param name="t"></param>
+        /// <param name="t">A new limiter value (from 0 to 1.0)</param>
         public void SetLimiter(float t)
         {
             _limiter = Mathf.Clamp01(t);
